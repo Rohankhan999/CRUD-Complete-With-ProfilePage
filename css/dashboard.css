@@ -1,0 +1,47 @@
+*{
+    box-sizing: border-box;
+    padding: 0px;
+    margin: 0px;
+}
+body{
+    background-color: #DEDEDE;
+    overflow: hidden;
+
+}
+aside{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: black;
+    width:300px;
+    height:600px;
+}
+h1,h2{
+    text-align: center;
+    color: whitesmoke;
+    font-family:"Poppins", serif;
+    margin-top: 20px;
+}
+.profile{
+    background-color: whitesmoke;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-top: 30px;
+    cursor: pointer;
+}
+hr{
+    margin-top: 180px;
+    width:250px;
+}
+button{
+    background-color: whitesmoke;
+    border: transparent;
+    outline: transparent;
+    padding: 5px;
+    width: 100px;
+    border-radius: 5px;
+    font-family:"Poppins", serif;
+    margin-top: 15px;
+    cursor: pointer;
+}
