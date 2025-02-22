@@ -13,17 +13,18 @@ aside{
     flex-direction: column;
     align-items: center;
     background-color: black;
-    width:300px;
+    width:330px;
     height:600px;
 }
-h1,h2{
+h1{
     text-align: center;
     color: whitesmoke;
     font-family:"Poppins", serif;
     margin-top: 20px;
+    text-transform: capitalize;
 }
 .profile{
-    background-color: whitesmoke;
+    /* background-color: whitesmoke; */
     width: 150px;
     height: 150px;
     border-radius: 50%;
@@ -31,7 +32,7 @@ h1,h2{
     cursor: pointer;
 }
 hr{
-    margin-top: 180px;
+    margin-top: 200px;
     width:250px;
 }
 button{
@@ -44,4 +45,12 @@ button{
     font-family:"Poppins", serif;
     margin-top: 15px;
     cursor: pointer;
+}
+h2{
+    text-align: center;
+    color: whitesmoke;
+    font-family:"Poppins", serif;
+    margin-top: 20px;
+    text-transform: capitalize;
+    font-size: 19px;
 }

@@ -6,6 +6,7 @@ import { supabaseConfig } from "./config.js";
 let username = document.getElementById("name");
 let email = document.getElementById('email');
 let password = document.getElementById("password");
+
 let button = document.getElementById("btn");
 
 // Sign in a new user //
@@ -20,6 +21,9 @@ button.addEventListener("click", async () => {
             });
             return;
         }
+        
+        localStorage.setItem("Username",username.value)
+        
         const { data, error } = await supabaseConfig.auth.signUp({
             email: email.value,
             password: password.value,
@@ -58,4 +62,6 @@ button.addEventListener("click", async () => {
 
 
 });
+console.log();
+
 

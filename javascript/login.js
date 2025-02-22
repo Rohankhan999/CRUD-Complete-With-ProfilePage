@@ -9,7 +9,7 @@ let email = document.getElementById('email');
 let password = document.getElementById("password");
 let button = document.getElementById("btn");
 
-// Sign in a new user //
+// login new user //
 
 button.addEventListener("click", async () => {
     try {
@@ -26,6 +26,8 @@ button.addEventListener("click", async () => {
         const { data, error } = await supabaseConfig.auth.signInWithPassword({
             email: email.value,
             password: password.value,
+            
+
         })
         if (error) {
             Swal.fire({
@@ -61,4 +63,6 @@ button.addEventListener("click", async () => {
 
 
 });
+
+
 
