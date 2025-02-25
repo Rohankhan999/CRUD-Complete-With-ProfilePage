@@ -9,7 +9,7 @@ let data = async () => {
     try {
         const { data: { user } } = await supabaseConfig.auth.getUser()
         information.innerHTML = `
-        <h2>Username :${Username}</h2>
+        <h2>Username : ${Username}</h2>
         <h2>Email :  ${user.email} </h2> `;
 
     } catch (error) {

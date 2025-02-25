@@ -1,56 +1,89 @@
-*{
-    box-sizing: border-box;
-    padding: 0px;
-    margin: 0px;
+* {
+  box-sizing: border-box;
+  padding: 0px;
+  margin: 0px;
 }
-body{
-    background-color: #DEDEDE;
-    overflow: hidden;
-
+body {
+  background-color: #dedede;
+  overflow-x: hidden;
+  display: flex;
 }
-aside{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: black;
-    width:330px;
-    height:600px;
+aside {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: black;
+  width: 330px;
+  height: 100%;
 }
-h1{
-    text-align: center;
-    color: whitesmoke;
-    font-family:"Poppins", serif;
-    margin-top: 20px;
-    text-transform: capitalize;
+h1 {
+  text-align: center;
+  color: whitesmoke;
+  font-family: "Poppins", serif;
+  margin-top: 20px;
+  text-transform: capitalize;
 }
-.profile{
-    /* background-color: whitesmoke; */
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    margin-top: 30px;
-    cursor: pointer;
+.profile {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin-top: 30px;
+  cursor: pointer;
+  margin-bottom: 30px;
 }
-hr{
-    margin-top: 200px;
-    width:250px;
+hr {
+  margin-top: 200px;
+  width: 250px;
 }
-button{
-    background-color: whitesmoke;
-    border: transparent;
-    outline: transparent;
-    padding: 5px;
-    width: 100px;
+button {
+  background-color: whitesmoke;
+  border: transparent;
+  outline: transparent;
+  padding: 5px;
+  width: 100px;
+  border-radius: 5px;
+  font-family: "Poppins", serif;
+  margin-top: 15px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+h2 {
+  text-align: center;
+  color: whitesmoke;
+  font-family: "Poppins", serif;
+  margin-top: 20px;
+  text-transform: capitalize;
+  font-size: 15px;
+}
+section {
+  background-color: rgb(255, 255, 255);
+  height: 100%;
+  width: 100%;
+}
+#sectionDashboard {
+  text-align: left;
+  color: black;
+  font-family: "Poppins", serif;
+  margin-bottom: 20px;
+  font-size: 26px;
+}
+.searchbar {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+#UpdateProfile {
+  background-color: black;
+  color: white;
+  width: auto;
+}
+input{
+    width: 300px;
+    height: 30px;
     border-radius: 5px;
-    font-family:"Poppins", serif;
-    margin-top: 15px;
-    cursor: pointer;
+    border: 1px solid black;
+    padding: 5px;  
 }
-h2{
-    text-align: center;
-    color: whitesmoke;
-    font-family:"Poppins", serif;
-    margin-top: 20px;
-    text-transform: capitalize;
-    font-size: 19px;
+input:active{
+    border: 1px solid black;
 }
