@@ -90,7 +90,7 @@ input:active{
 }
 .data{
   background-color: black;
-  height: 470px;
+  height: auto;
   width:100%;
 }
 .footer{
