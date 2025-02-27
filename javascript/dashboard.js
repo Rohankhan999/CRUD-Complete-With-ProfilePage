@@ -2,7 +2,9 @@ import { supabaseConfig } from "./config.js";
 
 var information = document.getElementById("info");
 var Username = localStorage.getItem("Username");
-var logout = document.getElementById("out");
+var logout = document.getElementById("logout");
+var main = document.getElementById("data");
+
 
 // Aside Data;
 let data = async () => {
@@ -40,11 +42,11 @@ logout.addEventListener("click", async () => {
             text: "See you Soon 🤏🏻",
             icon: "success"
         }).then(() => {
-            window.location.href = "login.html"; 
+            window.location.href = "login.html";
         });
 
         console.log("User logged out successfully");
-        
+
     } catch (error) {
         console.log("Unexpected error occurred:", error);
         Swal.fire({
@@ -57,20 +59,124 @@ logout.addEventListener("click", async () => {
 
 
 
-// update a user
-
-var update = document.getElementById("UpdateProfile");
-update.addEventListener("click", async () => {
-    window.location.href = "update.html";
+// fetch data from the database//
+const fetchData = async () => {
     try {
-        const { data, error } = await supabaseConfig.auth.updateUser({
-            email: ""
-          })
-            console.log(data);  
-            console.log(error);
-                    
+        const { data, error } = await supabaseConfig
+            .from('data')
+            .select()
+        console.log("data Fetch Succesfully", data);
+        if (error) {
+            console.log("Error agaya Data nhi aya", error);
+        }
+        else {
+            console.log("data add successfully!");
+            console.log(data);
+            main.innerHTML = "";
+            data.forEach(post => {
+                main.innerHTML += `<div class="subpost">
+                
+                <h3>${post.Name}</h3>
+                <p>${post.Phone}</p>
+                <p>${post.Description}</p>
+                  <p id='num'>${post.id}</p>
+                  <div id="btn">
+                   <button id="delete" class="subPostBtn" data-id="${post.id}">Delete</button>
+                <button id="Update" class="subPostBtn" data-id="${post.id}">Update</button>
+                </div>
+                </div>`;
+            });
+        }
+
     } catch (error) {
-        console.log(error);
-        
-    }   
+        console.log("Error agaya Data nhi aya", error.message);
+
+    }
+
+}
+fetchData();
+
+
+
+// insert page open//
+
+var insert = document.getElementById("Insert");
+var insertpage = document.getElementById("insertPage");
+insert.addEventListener("click", async () => {
+    main.style.display = "none";
+    insertpage.style.display = "block";
 });
+
+var name = document.getElementById("name");
+var phone = document.getElementById("phone");
+var description = document.getElementById("description");
+var backbtn = document.getElementById("back");
+var insertdata = document.getElementById("insertData");
+insertdata.addEventListener("click", async () => {
+    try {
+        const { error } = await supabaseConfig
+            .from('data')
+            .insert({ Name: name.value, Phone: phone.value, Description: description.value })
+        console.log("Data Inserted Succesfully");
+        if (error) {
+            console.log("Error agaya Data nhi aya", error);
+        }
+        else {
+            console.log("data add successfully!");
+            Swal.fire({
+                title: "Data Added 🎉",
+                text: "Data has been added successfully!",
+                icon: "success"
+            });
+            main.style.display = "flex";
+           insertpage.style.display = "none";
+        }
+    } catch (error) {
+        console.log("Error agaya Data nhi aya", error.message);
+    }
+});
+
+backbtn.addEventListener("click", async () => {
+    main.style.display = "flex";
+    insertpage.style.display = "none";
+    fetchData();
+});
+
+const DeleteData = (async (postId) => {
+    try {
+        const response = await supabaseConfig
+            .from('data')
+            .delete()
+            .eq('id', postId)
+
+        if (error) {
+            console.log("error -->", error.message);
+        }
+        else {
+            console.log("data add successfully!");
+            console.log(response);
+        }
+    }
+    catch (error) {
+        console.log(error);
+
+    }
+});
+// var searchInput = document.getElementById("search");
+
+// searchInput.addEventListener("input", function () {
+//     let query = searchInput.value.toLowerCase();
+//     let subposts = document.querySelectorAll(".subpost");
+
+//     subposts.forEach((post) => {
+//         let name = post.querySelector("h3").textContent.toLowerCase();
+//         let phone = post.querySelector("p").textContent.toLowerCase();
+//         let description = post.querySelectorAll("p")[1].textContent.toLowerCase();
+
+//         if (name.includes(query) || phone.includes(query) || description.includes(query)) {
+//             post.style.display = "block";  // Show if matches
+//         } else {
+//             post.style.display = "none";   // Hide if not matches
+//         }
+//     });
+// });
