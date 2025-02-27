@@ -15,6 +15,7 @@ aside {
   background-color: black;
   width: 330px;
   height: 100%;
+  border-right : 1px whitesmoke solid;
 }
 h1 {
   text-align: center;
@@ -77,13 +78,27 @@ section {
   color: white;
   width: auto;
 }
-input {
-  width: 300px;
-  height: 30px;
-  border-radius: 5px;
-  border: 1px solid black;
-  padding: 5px;
+input{
+    width: 300px;
+    height: 30px;
+    border-radius: 5px;
+    border: 1px solid black;
+    padding: 5px;  
 }
-input:active {
-  border: 1px solid black;
+input:active{
+    border: 1px solid black;
+}
+.data{
+  background-color: black;
+  height: 470px;
+  width:100%;
+}
+.footer{
+  text-align: center;
+  font-family: "Poppins", serif;
+  height:100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
 }

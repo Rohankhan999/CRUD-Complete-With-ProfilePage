@@ -61,9 +61,10 @@ logout.addEventListener("click", async () => {
 
 var update = document.getElementById("UpdateProfile");
 update.addEventListener("click", async () => {
+    window.location.href = "update.html";
     try {
         const { data, error } = await supabaseConfig.auth.updateUser({
-            email: 'new@email.com'
+            email: ""
           })
             console.log(data);  
             console.log(error);
@@ -71,5 +72,5 @@ update.addEventListener("click", async () => {
     } catch (error) {
         console.log(error);
         
-    }
+    }   
 });
