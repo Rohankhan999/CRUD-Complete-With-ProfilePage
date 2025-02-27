@@ -54,3 +54,22 @@ logout.addEventListener("click", async () => {
         });
     }
 });
+
+
+
+// update a user
+
+var update = document.getElementById("UpdateProfile");
+update.addEventListener("click", async () => {
+    try {
+        const { data, error } = await supabaseConfig.auth.updateUser({
+            email: 'new@email.com'
+          })
+            console.log(data);  
+            console.log(error);
+                    
+    } catch (error) {
+        console.log(error);
+        
+    }
+});

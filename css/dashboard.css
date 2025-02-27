@@ -77,13 +77,13 @@ section {
   color: white;
   width: auto;
 }
-input{
-    width: 300px;
-    height: 30px;
-    border-radius: 5px;
-    border: 1px solid black;
-    padding: 5px;  
+input {
+  width: 300px;
+  height: 30px;
+  border-radius: 5px;
+  border: 1px solid black;
+  padding: 5px;
 }
-input:active{
-    border: 1px solid black;
+input:active {
+  border: 1px solid black;
 }
