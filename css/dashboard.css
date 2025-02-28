@@ -17,9 +17,9 @@ aside {
   align-items: center;
   background-color: rgb(0, 0, 0);
   width: 330px;
-  height:auto;
+  height: auto;
   /* border-right: 1px whitesmoke solid;   */
-  position:relative;
+  position: relative;
 }
 h1 {
   text-align: center;
@@ -74,6 +74,24 @@ section {
   margin-bottom: 20px;
   font-size: 26px;
 }
+.form {
+  border-radius: 10px;
+  background-color: black;
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  flex-direction: column;
+  height: auto;
+  padding: 30px;
+}
+.insertinput {
+  display: flex;
+  background-color: rgb(255, 255, 255);
+  justify-content: center;
+  align-items: center;
+  margin-left: 0px;
+  margin-bottom:5px;
+}
 .searchbar {
   background-color: whitesmoke;
   width: 100%;
@@ -126,7 +144,8 @@ input:active {
 .subpost:hover {
   background-color: rgb(255, 255, 255);
 }
-#Insert,#back{
+#Insert,
+#back {
   margin-left: 30px;
   margin-top: 30px;
 }
@@ -141,14 +160,14 @@ p {
 h3 {
   font-size: 30px;
 }
-#btn{
- display: flex;
- justify-content: center;
- align-items: end;
- gap: 10px;
- margin-top: 10px;
+#btn {
+  display: flex;
+  justify-content: center;
+  align-items: end;
+  gap: 10px;
+  margin-top: 10px;
 }
-.subPostBtn{
+.subPostBtn {
   background-color: black;
   color: whitesmoke;
 }
@@ -162,15 +181,21 @@ h3 {
   padding: 10px;
   border: 1px black solid;
 }
-.section{
+.section {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   text-align: center;
   padding: 20px;
-  background-color: rgb(248, 11, 11);
- width:600px;
- margin-left: 350px;
-
+  background-color: rgb(255, 249, 249);
+  width: 600px;
+  margin-left: 350px;
+  color: black;
+  border-radius: 20px;
+  padding-bottom: 30px;
+}
+#heading{
+  color: black;
+  margin-bottom: 20px;
 }

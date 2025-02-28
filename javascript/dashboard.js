@@ -65,17 +65,16 @@ const fetchData = async () => {
         const { data, error } = await supabaseConfig
             .from('data')
             .select()
-        console.log("data Fetch Succesfully", data);
+        // console.log("data Fetch Succesfully", data);
         if (error) {
             console.log("Error agaya Data nhi aya", error);
         }
         else {
-            console.log("data add successfully!");
+            // console.log("data add successfully!");
             console.log(data);
             main.innerHTML = "";
             data.forEach(post => {
                 main.innerHTML += `<div class="subpost">
-                
                 <h3>${post.Name}</h3>
                 <p>${post.Phone}</p>
                 <p>${post.Description}</p>
