@@ -85,6 +85,7 @@ const fetchData = async () => {
                 </div>
                 </div>`;
             });
+            eventlistner();
         }
 
     } catch (error) {
@@ -161,21 +162,83 @@ const DeleteData = (async (postId) => {
 
     }
 });
-// var searchInput = document.getElementById("search");
 
-// searchInput.addEventListener("input", function () {
-//     let query = searchInput.value.toLowerCase();
-//     let subposts = document.querySelectorAll(".subpost");
 
-//     subposts.forEach((post) => {
-//         let name = post.querySelector("h3").textContent.toLowerCase();
-//         let phone = post.querySelector("p").textContent.toLowerCase();
-//         let description = post.querySelectorAll("p")[1].textContent.toLowerCase();
+// Update Method
+const UpdateData = (async (postId) => {
+    let newTitle = prompt("add new title");
+    let newDescription = prompt("add new Description");
+    let newphone = prompt("add new phone number");
+    if(!newTitle || !newDescription || !newphone){
+        Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Please fill all Fields",
+            
+          });
+          return;
+    }
+  
+    try {
+        const { error } = await supabaseConfig
+        .from('data')
+        .update({Name: newTitle, Description: newDescription, Phone : newphone}) 
+        .eq('id', postId)      
 
-//         if (name.includes(query) || phone.includes(query) || description.includes(query)) {
-//             post.style.display = "block";  // Show if matches
-//         } else {
-//             post.style.display = "none";   // Hide if not matches
-//         }
-//     });
-// });
+        if (error) {
+            console.log("error -->", error.message);
+        }
+        else {
+            console.log("data add successfully!");
+            console.log(data);
+            fetchData();
+        }
+        
+    }
+    catch (error) {
+        console.log(error);
+
+    }
+});
+
+
+// Event Handlers
+const eventlistner = () => {
+let UpdateButtons = document.querySelectorAll('#Update');
+let DeleteButtons = document.querySelectorAll('#delete');
+UpdateButtons.forEach((Update) =>{
+    Update.addEventListener('click', (e) => {
+        const id = e.target.getAttribute('data-id');
+        UpdateData(id);
+    });
+
+    DeleteButtons.forEach((del) =>{
+        del.addEventListener('click', (e) => {
+            const id = e.target.getAttribute('data-id');
+            DeleteData(id);
+        });
+    
+});
+})
+};
+
+
+// Search Functionality
+var searchInput = document.getElementById("search");
+
+searchInput.addEventListener("input", function () {
+    let query = searchInput.value.toLowerCase();
+    let subposts = document.querySelectorAll(".subpost");
+
+    subposts.forEach((post) => {
+        let name = post.querySelector("h3").textContent.toLowerCase();
+        let phone = post.querySelector("p").textContent.toLowerCase();
+        let description = post.querySelectorAll("p")[1].textContent.toLowerCase();
+
+        if (name.includes(query) || phone.includes(query) || description.includes(query)) {
+            post.style.display = "block";  // Show if matches
+        } else {
+            post.style.display = "none";   // Hide if not matches
+        }
+    });
+});
