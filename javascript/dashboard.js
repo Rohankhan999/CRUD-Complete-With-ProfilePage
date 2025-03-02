@@ -129,7 +129,7 @@ insertdata.addEventListener("click", async () => {
                 icon: "success"
             });
             main.style.display = "flex";
-           insertpage.style.display = "none";
+            insertpage.style.display = "none";
         }
     } catch (error) {
         console.log("Error agaya Data nhi aya", error.message);
@@ -169,21 +169,21 @@ const UpdateData = (async (postId) => {
     let newTitle = prompt("add new title");
     let newDescription = prompt("add new Description");
     let newphone = prompt("add new phone number");
-    if(!newTitle || !newDescription || !newphone){
+    if (!newTitle || !newDescription || !newphone) {
         Swal.fire({
             icon: "error",
             title: "Oops...",
             text: "Please fill all Fields",
-            
-          });
-          return;
+
+        });
+        return;
     }
-  
+
     try {
         const { error } = await supabaseConfig
-        .from('data')
-        .update({Name: newTitle, Description: newDescription, Phone : newphone}) 
-        .eq('id', postId)      
+            .from('data')
+            .update({ Name: newTitle, Description: newDescription, Phone: newphone })
+            .eq('id', postId)
 
         if (error) {
             console.log("error -->", error.message);
@@ -193,7 +193,7 @@ const UpdateData = (async (postId) => {
             console.log(data);
             fetchData();
         }
-        
+
     }
     catch (error) {
         console.log(error);
@@ -204,22 +204,22 @@ const UpdateData = (async (postId) => {
 
 // Event Handlers
 const eventlistner = () => {
-let UpdateButtons = document.querySelectorAll('#Update');
-let DeleteButtons = document.querySelectorAll('#delete');
-UpdateButtons.forEach((Update) =>{
-    Update.addEventListener('click', (e) => {
-        const id = e.target.getAttribute('data-id');
-        UpdateData(id);
-    });
-
-    DeleteButtons.forEach((del) =>{
-        del.addEventListener('click', (e) => {
+    let UpdateButtons = document.querySelectorAll('#Update');
+    let DeleteButtons = document.querySelectorAll('#delete');
+    UpdateButtons.forEach((Update) => {
+        Update.addEventListener('click', (e) => {
             const id = e.target.getAttribute('data-id');
-            DeleteData(id);
+            UpdateData(id);
         });
-    
-});
-})
+
+        DeleteButtons.forEach((del) => {
+            del.addEventListener('click', (e) => {
+                const id = e.target.getAttribute('data-id');
+                DeleteData(id);
+            });
+
+        });
+    })
 };
 
 
