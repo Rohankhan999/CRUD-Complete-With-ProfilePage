@@ -1,244 +1,154 @@
 import { supabaseConfig } from "./config.js";
 
-var information = document.getElementById("info");
-var Username = localStorage.getItem("Username");
-var logout = document.getElementById("logout");
-var main = document.getElementById("data");
+// DOM Elements
+const info = document.getElementById("info");
+const Username = localStorage.getItem("Username");
+const logoutBtn = document.getElementById("logout");
+const main = document.getElementById("data");
+const insertPage = document.getElementById("insertPage");
+const insertBtn = document.getElementById("Insert");
+const backBtn = document.getElementById("back");
+const insertDataBtn = document.getElementById("insertData");
+const nameInput = document.getElementById("name");
+const phoneInput = document.getElementById("phone");
+const descInput = document.getElementById("description");
+const searchInput = document.getElementById("search");
 
+// 🧑‍💼 Display logged-in user info
+(async () => {
+  const { data: { user } } = await supabaseConfig.auth.getUser();
+  info.innerHTML = `<h2>Username : ${Username}</h2><h2>Email : ${user.email}</h2>`;
+})();
 
-// Aside Data;
-let data = async () => {
-    try {
-        const { data: { user } } = await supabaseConfig.auth.getUser()
-        information.innerHTML = `
-        <h2>Username : ${Username}</h2>
-        <h2>Email :  ${user.email} </h2> `;
-
-    } catch (error) {
-        console.log(error);
-
-    }
-}
-data();
-
-// log out user //
-
-logout.addEventListener("click", async () => {
-    try {
-        const { error } = await supabaseConfig.auth.signOut();
-
-        if (error) {
-            console.log("Error while logging out:", error);
-            Swal.fire({
-                title: "Error ❌",
-                text: "Failed to log out. Please try again.",
-                icon: "error"
-            });
-            return;
-        }
-
-        Swal.fire({
-            title: "Logged Out 🤦🏻‍♂️",
-            text: "See you Soon 🤏🏻",
-            icon: "success"
-        }).then(() => {
-            window.location.href = "login.html";
-        });
-
-        console.log("User logged out successfully");
-
-    } catch (error) {
-        console.log("Unexpected error occurred:", error);
-        Swal.fire({
-            title: "Error ❌",
-            text: "Something went wrong!",
-            icon: "error"
-        });
-    }
-});
-
-
-
-// fetch data from the database//
+// 📥 Fetch data
 const fetchData = async () => {
-    try {
-        const { data, error } = await supabaseConfig
-            .from('data')
-            .select()
-        // console.log("data Fetch Succesfully", data);
-        if (error) {
-            console.log("Error agaya Data nhi aya", error);
-        }
-        else {
-            // console.log("data add successfully!");
-            console.log(data);
-            main.innerHTML = "";
-            data.forEach(post => {
-                main.innerHTML += `<div class="subpost">
-                <h3>${post.Name}</h3>
-                <p>${post.Phone}</p>
-                <p>${post.Description}</p>
-                  <p id='num'>${post.id}</p>
-                  <div id="btn">
-                   <button id="delete" class="subPostBtn" data-id="${post.id}">Delete</button>
-                <button id="Update" class="subPostBtn" data-id="${post.id}">Update</button>
-                </div>
-                </div>`;
-            });
-            eventlistner();
-        }
+  const { data, error } = await supabaseConfig.from("data").select();
+  if (error) return console.log("Fetch Error:", error.message);
 
-    } catch (error) {
-        console.log("Error agaya Data nhi aya", error.message);
-
-    }
-
-}
+  main.innerHTML = "";
+  data.forEach(post => {
+    main.innerHTML += `
+      <div class="subpost">
+        <h3>${post.name}</h3>
+        <p>${post.phone}</p>
+        <p>${post.description}</p>
+        <p id="num">${post.id}</p>
+        <div id="btn">
+          <button class="deleteBtn subPostBtn" data-id="${post.id}">Delete</button>
+          <button class="updateBtn subPostBtn" data-id="${post.id}">Update</button>
+        </div>
+      </div>
+    `;
+  });
+  attachEventListeners();
+};
 fetchData();
 
+// 🔗 Attach button event listeners
+function attachEventListeners() {
+  document.querySelectorAll(".deleteBtn").forEach(btn =>
+    btn.addEventListener("click", e => DeleteData(e.target.dataset.id))
+  );
+  document.querySelectorAll(".updateBtn").forEach(btn =>
+    btn.addEventListener("click", e => UpdateData(e.target.dataset.id))
+  );
+}
 
-
-// insert page open//
-
-var insert = document.getElementById("Insert");
-var insertpage = document.getElementById("insertPage");
-insert.addEventListener("click", async () => {
-    main.style.display = "none";
-    insertpage.style.display = "block";
+// ➕ Insert page toggle
+insertBtn.addEventListener("click", () => {
+  main.style.display = "none";
+  insertPage.style.display = "block";
 });
 
-var name = document.getElementById("name");
-var phone = document.getElementById("phone");
-var description = document.getElementById("description");
-var backbtn = document.getElementById("back");
-var insertdata = document.getElementById("insertData");
-insertdata.addEventListener("click", async () => {
-    try {
-        const { error } = await supabaseConfig
-            .from('data')
-            .insert({ Name: name.value, Phone: phone.value, Description: description.value })
-        console.log("Data Inserted Succesfully");
-        if (error) {
-            console.log("Error agaya Data nhi aya", error);
-        }
-        else {
-            console.log("data add successfully!");
-            Swal.fire({
-                title: "Data Added 🎉",
-                text: "Data has been added successfully!",
-                icon: "success"
-            });
-            main.style.display = "flex";
-            insertpage.style.display = "none";
-        }
-    } catch (error) {
-        console.log("Error agaya Data nhi aya", error.message);
-    }
+backBtn.addEventListener("click", () => {
+  insertPage.style.display = "none";
+  main.style.display = "flex";
+  fetchData();
 });
 
-backbtn.addEventListener("click", async () => {
-    main.style.display = "flex";
-    insertpage.style.display = "none";
-    fetchData();
+// ➕ Insert data
+insertDataBtn.addEventListener("click", async () => {
+  const { error } = await supabaseConfig.from("data").insert({
+    name: nameInput.value,
+    phone: phoneInput.value,
+    description: descInput.value
+  });
+
+  if (error) return Swal.fire("Error", error.message, "error");
+
+  Swal.fire("Inserted ✅", "Data added successfully", "success");
+  insertPage.style.display = "none";
+  main.style.display = "flex";
+  fetchData();
 });
 
-const DeleteData = (async (postId) => {
-    try {
-        const response = await supabaseConfig
-            .from('data')
-            .delete()
-            .eq('id', postId)
-
-        if (error) {
-            console.log("error -->", error.message);
-        }
-        else {
-            console.log("data add successfully!");
-            console.log(response);
-        }
-    }
-    catch (error) {
-        console.log(error);
-
-    }
-});
-
-
-// Update Method
-const UpdateData = (async (postId) => {
-    let newTitle = prompt("add new title");
-    let newDescription = prompt("add new Description");
-    let newphone = prompt("add new phone number");
-    if (!newTitle || !newDescription || !newphone) {
-        Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: "Please fill all Fields",
-
-        });
-        return;
-    }
-
-    try {
-        const { error } = await supabaseConfig
-            .from('data')
-            .update({ Name: newTitle, Description: newDescription, Phone: newphone })
-            .eq('id', postId)
-
-        if (error) {
-            console.log("error -->", error.message);
-        }
-        else {
-            console.log("data add successfully!");
-            console.log(data);
-            fetchData();
-        }
-
-    }
-    catch (error) {
-        console.log(error);
-
-    }
-});
-
-
-// Event Handlers
-const eventlistner = () => {
-    let UpdateButtons = document.querySelectorAll('#Update');
-    let DeleteButtons = document.querySelectorAll('#delete');
-    UpdateButtons.forEach((Update) => {
-        Update.addEventListener('click', (e) => {
-            const id = e.target.getAttribute('data-id');
-            UpdateData(id);
-        });
-
-        DeleteButtons.forEach((del) => {
-            del.addEventListener('click', (e) => {
-                const id = e.target.getAttribute('data-id');
-                DeleteData(id);
-            });
-
-        });
-    })
+// ❌ Delete data
+const DeleteData = async (id) => {
+  const { error } = await supabaseConfig.from("data").delete().eq("id", id);
+  if (error) return Swal.fire("Error", error.message, "error");
+  fetchData();
 };
 
+// 🔄 Update data
+const UpdateData = async (id) => {
+  const name = prompt("New Name?");
+  const phone = prompt("New Phone?");
+  const description = prompt("New Description?");
 
-// Search Functionality
-var searchInput = document.getElementById("search");
+  if (!name || !phone || !description) {
+    return Swal.fire("Error", "All fields are required", "error");
+  }
 
-searchInput.addEventListener("input", function () {
-    let query = searchInput.value.toLowerCase();
-    let subposts = document.querySelectorAll(".subpost");
+  const { error } = await supabaseConfig
+    .from("data")
+    .update({ name, phone, description })
+    .eq("id", id);
 
-    subposts.forEach((post) => {
-        let name = post.querySelector("h3").textContent.toLowerCase();
-        let phone = post.querySelector("p").textContent.toLowerCase();
-        let description = post.querySelectorAll("p")[1].textContent.toLowerCase();
+  if (error) return Swal.fire("Error", error.message, "error");
+  fetchData();
+};
 
-        if (name.includes(query) || phone.includes(query) || description.includes(query)) {
-            post.style.display = "block";  // Show if matches
-        } else {
-            post.style.display = "none";   // Hide if not matches
-        }
-    });
+// 🔓 Logout
+logoutBtn.addEventListener("click", async () => {
+  const { error } = await supabaseConfig.auth.signOut();
+  if (error) return Swal.fire("Error", "Logout failed", "error");
+
+  Swal.fire("Logged Out", "See you soon!", "success").then(() => {
+    window.location.href = "login.html";
+  });
+});
+
+// 🔍 Search
+searchInput.addEventListener("input", (e) => {
+  const q = e.target.value.toLowerCase();
+  document.querySelectorAll(".subpost").forEach(post => {
+    const name = post.querySelector("h3").textContent.toLowerCase();
+    const phone = post.querySelectorAll("p")[0].textContent.toLowerCase();
+    const description = post.querySelectorAll("p")[1].textContent.toLowerCase();
+
+    if (name.includes(q) || phone.includes(q) || description.includes(q)) {
+      post.style.display = "block";
+    } else {
+      post.style.display = "none";
+    }
+  });
+});
+
+// 🔁 Realtime Listener
+supabaseConfig
+  .channel("realtime-data")
+  .on("postgres_changes", {
+    event: "*",
+    schema: "public",
+    table: "data"
+  }, () => {
+    console.log("🔄 Realtime update detected");
+    fetchData();
+  })
+  .subscribe();
+const toggleBtn = document.getElementById("toggleMenu");
+const aside = document.querySelector("aside");
+
+toggleBtn.addEventListener("click", () => {
+  aside.classList.toggle("active");
 });

@@ -125,3 +125,78 @@ footer{
 h3{
   padding: 20px;
 }
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+  }
+
+  #mainheading {
+    font-size: 22px;
+    margin-left: 0;
+  }
+
+  ul {
+    display: flex;
+    justify-content: center;
+    padding: 0;
+  }
+
+  ul li {
+    margin: 0 15px;
+    font-size: 16px;
+  }
+
+  section {
+    flex-direction: column;
+    padding: 20px;
+    height: auto;
+  }
+
+  .left, .right {
+    width: 100%;
+    height: auto;
+    border-radius: 0;
+    border: none;
+  }
+
+  .left img {
+    width: 250px;
+  }
+
+  .rightsub {
+    width: 90%;
+    height: auto;
+    padding: 20px;
+    margin-top: 20px;
+  }
+
+  h1 {
+    font-size: 24px;
+    text-align: center;
+  }
+
+  input {
+    width: 90%;
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  button {
+    width: 90%;
+    font-size: 16px;
+  }
+
+  p {
+    font-size: 14px;
+    text-align: center;
+  }
+
+  footer h3 {
+    font-size: 14px;
+    padding: 15px;
+    line-height: 1.4;
+  }
+}

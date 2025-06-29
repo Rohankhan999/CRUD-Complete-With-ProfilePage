@@ -199,4 +199,68 @@ h3 {
   color: black;
   margin-bottom: 20px;
 }
+@media (max-width: 768px) {
+  body {
+    flex-direction: column;
+  }
+
+  aside {
+    width: 100%;
+    height: auto;
+    position: static;
+  }
+
+  section {
+    width: 100%;
+    padding: 10px;
+  }
+
+  #sectionDashboard {
+    font-size: 20px;
+    margin-left: 10px;
+  }
+
+  input {
+    width: 90%;
+    margin: 10px auto;
+    margin-left: 0;
+    display: block;
+  }
+
+  button {
+    width: 90%;
+    margin: 10px auto;
+    display: block;
+  }
+
+  .subpost {
+    width: 100%;
+    margin: 10px auto;
+  }
+
+  .searchbar {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  .form {
+    width: 100%;
+  }
+
+  .section {
+    width: 95%;
+    margin: 0 auto;
+    padding: 10px;
+  }
+
+  h1, h2, h3, p {
+    font-size: 16px;
+    text-align: center;
+  }
+
+  #btn {
+    flex-direction: column;
+  }
+}
 
