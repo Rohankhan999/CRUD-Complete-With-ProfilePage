@@ -1,8 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
 * {
   box-sizing: border-box;
   padding: 0px;
   margin: 0px;
 }
+
 body {
   width: 100%;
   height: 100%;
@@ -10,24 +13,26 @@ body {
   overflow-x: hidden;
   display: flex;
   justify-content: stretch;
+  font-family: "Poppins", sans-serif;
 }
+
 aside {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: rgb(0, 0, 0);
+  background-color: black;
   width: 330px;
   height: auto;
-  /* border-right: 1px whitesmoke solid;   */
   position: relative;
 }
+
 h1 {
   text-align: center;
   color: whitesmoke;
-  font-family: "Poppins", serif;
   margin-top: 20px;
   text-transform: capitalize;
 }
+
 .profile {
   width: 150px;
   height: 150px;
@@ -36,44 +41,61 @@ h1 {
   cursor: pointer;
   margin-bottom: 30px;
 }
+
+#insertPage,
+#Updatedata {
+  display: none;
+  position: absolute;
+  background-color: black;
+  height: 100vh;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  overflow-y: auto;
+}
+
 hr {
   margin-top: 200px;
   width: 250px;
 }
+
 button {
   background-color: whitesmoke;
-  border: transparent;
-  outline: transparent;
+  border: none;
+  outline: none;
   padding: 5px;
   width: 100px;
   border-radius: 5px;
-  font-family: "Poppins", serif;
+  font-family: "Poppins", sans-serif;
   margin-top: 15px;
   cursor: pointer;
   margin-bottom: 20px;
   justify-content: center;
 }
+
 h2 {
   text-align: center;
   color: whitesmoke;
-  font-family: "Poppins", serif;
   margin-top: 20px;
   text-transform: capitalize;
   font-size: 15px;
 }
+
 section {
-  background-color: rgb(255, 255, 255);
+  background-color: white;
   height: 100%;
   width: 100%;
 }
+
 #sectionDashboard {
   float: left;
   margin-left: 30px;
   color: black;
-  font-family: "Poppins", serif;
   margin-bottom: 20px;
   font-size: 26px;
 }
+
 .form {
   border-radius: 10px;
   background-color: black;
@@ -84,30 +106,35 @@ section {
   height: auto;
   padding: 30px;
 }
+
 .insertinput {
   display: flex;
-  background-color: rgb(255, 255, 255);
+  background-color: white;
   justify-content: center;
   align-items: center;
   margin-left: 0px;
-  margin-bottom:5px;
+  margin-bottom: 5px;
 }
+
 .searchbar {
   background-color: whitesmoke;
   width: 100%;
   float: left;
 }
+
 #UpdateProfile {
   background-color: black;
   color: white;
   width: auto;
   margin-left: 80px;
 }
+
 #logout {
   background-color: black;
   color: white;
   width: auto;
 }
+
 input {
   width: 300px;
   height: 30px;
@@ -117,9 +144,11 @@ input {
   margin-left: 160px;
   margin-top: 25px;
 }
+
 input:active {
   border: 1px solid black;
 }
+
 #data {
   background-color: black;
   height: 100%;
@@ -129,6 +158,7 @@ input:active {
   gap: 30px;
   padding: 20px;
 }
+
 .subpost {
   background-color: rgb(212, 212, 212);
   width: 300px;
@@ -137,29 +167,34 @@ input:active {
   border-radius: 5px;
   padding: 20px;
   border: 1px solid black;
-  font-family: "Poppins", serif;
   text-align: center;
   flex-wrap: wrap;
 }
+
 .subpost:hover {
-  background-color: rgb(255, 255, 255);
+  background-color: white;
 }
+
 #Insert,
 #back {
   margin-left: 30px;
   margin-top: 30px;
 }
+
 p {
   margin-top: 10px;
   text-transform: capitalize;
   font-family: cursive;
 }
+
 #num {
   margin-top: 40px;
 }
+
 h3 {
   font-size: 30px;
 }
+
 #btn {
   display: flex;
   justify-content: center;
@@ -167,20 +202,22 @@ h3 {
   gap: 10px;
   margin-top: 10px;
 }
+
 .subPostBtn {
   background-color: black;
   color: whitesmoke;
 }
+
 .footer {
   text-align: center;
-  font-family: "Poppins", serif;
-  height: 100p;
+  height: 100px;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 10px;
   border: 1px black solid;
 }
+
 .section {
   display: flex;
   justify-content: center;
@@ -195,10 +232,12 @@ h3 {
   border-radius: 20px;
   padding-bottom: 30px;
 }
-#heading{
+
+#heading {
   color: black;
   margin-bottom: 20px;
 }
+
 @media (max-width: 768px) {
   body {
     flex-direction: column;
@@ -263,4 +302,3 @@ h3 {
     flex-direction: column;
   }
 }
-
